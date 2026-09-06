@@ -1,42 +1,6 @@
-'use client';
+import { CharityOrganization, DonationProject, CharityProduct } from '../types';
 
-import { useState } from 'react';
-import Header from '@/components/Header';
-import SearchBar from '@/components/SearchBar';
-import Tabs from '@/components/Tabs';
-import FilterSearch from '@/components/FilterSearch';
-import CharityOrganization from '@/components/CharityOrganization';
-import DonationProject from '@/components/DonationProject';
-import CharityProduct from '@/components/CharityProduct';
-import Footer from '@/components/Footer';
-import EmptyState from '@/components/EmptyState';
-import styles from './page.module.scss';
-
-interface CharityOrganization {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface DonationProject {
-  id: number;
-  organization: string;
-  title: string;
-  tags: string[];
-  image: string;
-}
-
-interface CharityProduct {
-  id: number;
-  title: string;
-  organization: string;
-  price: string;
-  image: string;
-}
-
-const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = [
-  // ... (keeping existing)
+export const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = [
   {
     id: 1,
     title: '公益團體名稱公益團體名稱公益團',
@@ -99,7 +63,7 @@ const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = [
   },
 ];
 
-const MOCK_DONATION_PROJECTS: DonationProject[] = [
+export const MOCK_DONATION_PROJECTS: DonationProject[] = [
   {
     id: 1,
     organization: '社團法人台灣善耘社福協會',
@@ -123,7 +87,7 @@ const MOCK_DONATION_PROJECTS: DonationProject[] = [
   },
 ];
 
-const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
+export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
   {
     id: 1,
     title: '給能哥系列 | 不鏽鋼手提冰壩杯',
@@ -167,70 +131,3 @@ const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     image: 'https://picsum.photos/id/49/300/300',
   },
 ];
-
-export default function Home() {
-  const [activeTab, setActiveTab] = useState(0);
-
-  return (
-    <main className={styles.main}>
-      <Header />
-      <SearchBar />
-      <Tabs activeTab={activeTab} onTabChange={setActiveTab} />
-
-      <div className={styles.contentWrapper}>
-        {activeTab === 0 && (
-          <>
-            <FilterSearch />
-            <div className={styles.listContainer}>
-              {MOCK_CHARITY_ORGANIZATIONS.map((item) => (
-                <CharityOrganization
-                  key={item.id}
-                  title={item.title}
-                  description={item.description}
-                  image={item.image}
-                />
-              ))}
-            </div>
-            <Footer />
-          </>
-        )}
-
-        {activeTab === 1 && (
-          <>
-            <FilterSearch />
-            <div className={styles.listContainer}>
-              {MOCK_DONATION_PROJECTS.map((project) => (
-                <DonationProject
-                  key={project.id}
-                  organization={project.organization}
-                  title={project.title}
-                  tags={project.tags}
-                  image={project.image}
-                />
-              ))}
-            </div>
-            <Footer />
-          </>
-        )}
-
-        {activeTab === 2 && (
-          <>
-            <FilterSearch filterLabel="身心障礙服務" />
-            <div className={styles.productGrid}>
-              {MOCK_CHARITY_PRODUCTS.map((product) => (
-                <CharityProduct
-                  key={product.id}
-                  title={product.title}
-                  organization={product.organization}
-                  price={product.price}
-                  image={product.image}
-                />
-              ))}
-            </div>
-            <Footer />
-          </>
-        )}
-      </div>
-    </main>
-  );
-}
