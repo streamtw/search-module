@@ -1,0 +1,61 @@
+.card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  padding: 12px 16px;
+}
+
+.organization {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.tagWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #999;
+}
+
+.tagIcon {
+  flex-shrink: 0;
+  color: #ffcdd2;
+}
+
+.tags {
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.separator {
+  margin: 0 2px;
+}
