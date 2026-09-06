@@ -16,3 +16,10 @@
 .listContainer {
   padding-bottom: 24px;
 }
+
+.productGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-bottom: 24px;
+}

@@ -1,0 +1,56 @@
+.card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; // Square images based on mockup
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  line-height: 1.4;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.8em; // Fix height for 2 lines to keep alignment
+}
+
+.organization {
+  font-size: 0.8125rem;
+  color: #999;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d32f2f;
+  margin-top: auto;
+}
