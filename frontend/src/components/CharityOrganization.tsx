@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import styles from './Card.module.scss';
+import styles from './CharityOrganization.module.scss';
 
-interface CardProps {
+interface CharityOrganizationProps {
   title: string;
   description: string;
   image: string;
 }
 
-export default function Card({ title, description, image }: CardProps) {
+export default function CharityOrganization({ title, description, image }: CharityOrganizationProps) {
   return (
     <div className={styles.card}>
       <div className={styles.logoContainer}>
