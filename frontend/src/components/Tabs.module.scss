@@ -1,0 +1,38 @@
+.tabsContainer {
+  background-color: white;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tab {
+  padding: 12px 0;
+  font-size: 1rem;
+  color: #666666;
+  position: relative;
+  transition: color 0.2s;
+  flex: 1;
+  text-align: center;
+
+  &.active {
+    color: #333333;
+    font-weight: 500;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: #d32f2f;
+      border-radius: 2px 2px 0 0;
+    }
+  }
+}
