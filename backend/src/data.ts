@@ -1,4 +1,4 @@
-import type { CharityOrganization, DonationProject, CharityProduct } from './types';
+import type { CharityOrganization, DonationProject, CharityProduct } from './types.js';
 
 export const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = [
   {

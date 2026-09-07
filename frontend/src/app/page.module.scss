@@ -14,7 +14,7 @@
 }
 
 .listContainer {
-  padding-bottom: 24px;
+  padding-top: 24px;
 }
 
 .productGrid {
@@ -22,4 +22,35 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   padding-bottom: 24px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.loader {
+  --color-1: #888; // Adjusted from #fff to be visible on light background
+  --size: 0.75px; // Adjusted for better visibility
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border: calc(5 * var(--size)) solid var(--color-1);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

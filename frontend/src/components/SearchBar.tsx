@@ -3,9 +3,11 @@ import styles from './SearchBar.module.scss';
 
 interface SearchBarProps {
   onCancel?: () => void;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
-export default function SearchBar({ onCancel }: SearchBarProps) {
+export default function SearchBar({ onCancel, value, onChange }: SearchBarProps) {
   return (
     <div className={styles.container}>
       <div className={styles.searchWrapper}>
@@ -13,7 +15,8 @@ export default function SearchBar({ onCancel }: SearchBarProps) {
         <input
           type="text"
           placeholder="搜尋"
-          defaultValue=""
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
           className={styles.input}
         />
       </div>
