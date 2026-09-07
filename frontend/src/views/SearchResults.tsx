@@ -73,7 +73,7 @@ export default function SearchResults() {
       return (
         <>
           {organizations.length > 0 ? (
-            <div className={styles.listContainer}>
+            <div className={`mt-3 ${styles.listContainer}`}>
               {organizations.map((item) => (
                 <CharityOrganizationComp
                   key={item.id}
@@ -95,7 +95,7 @@ export default function SearchResults() {
       return (
         <>
           {projects.length > 0 ? (
-            <div className={styles.listContainer}>
+            <div className={`mt-3 ${styles.listContainer}`}>
               {projects.map((project) => (
                 <DonationProjectComp
                   key={project.id}
@@ -118,7 +118,7 @@ export default function SearchResults() {
       return (
         <>
           {products.length > 0 ? (
-            <div className={styles.productGrid}>
+            <div className={`mt-3 ${styles.productGrid}`}>
               {products.map((product) => (
                 <CharityProductComp
                   key={product.id}
