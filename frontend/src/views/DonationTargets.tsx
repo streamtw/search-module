@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import EmptyState from '../components/EmptyState';
 import styles from '../app/page.module.scss';
 import type { CharityOrganization, DonationProject, CharityProduct } from '../types';
+import { API_BASE_URL } from '../config';
 
 export default function DonationTargets() {
   const [activeTab, setActiveTab] = useState(0);
@@ -29,15 +30,15 @@ export default function DonationTargets() {
       setLoadingMap((prev) => ({ ...prev, [activeTab]: true }));
       try {
         if (activeTab === 0) {
-          const res = await fetch('http://localhost:3001/api/charity-organizations');
+          const res = await fetch(`${API_BASE_URL}/charity-organizations`);
           const data = await res.json();
           setOrganizations(data);
         } else if (activeTab === 1) {
-          const res = await fetch('http://localhost:3001/api/donation-projects');
+          const res = await fetch(`${API_BASE_URL}/donation-projects`);
           const data = await res.json();
           setProjects(data);
         } else if (activeTab === 2) {
-          const res = await fetch('http://localhost:3001/api/charity-products');
+          const res = await fetch(`${API_BASE_URL}/charity-products`);
           const data = await res.json();
           setProducts(data);
         }

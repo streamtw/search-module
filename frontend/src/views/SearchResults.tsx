@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import EmptyState from '../components/EmptyState';
 import styles from '../app/page.module.scss';
 import type { CharityOrganization, DonationProject, CharityProduct } from '../types';
+import { API_BASE_URL } from '../config';
 
 export default function SearchResults() {
   const [activeTab, setActiveTab] = useState(0);
@@ -28,11 +29,11 @@ export default function SearchResults() {
     try {
       let url = '';
       if (tabIndex === 0) {
-        url = `http://localhost:3001/api/charity-organizations?keyword=${encodeURIComponent(currentKeyword)}`;
+        url = `${API_BASE_URL}/charity-organizations?keyword=${encodeURIComponent(currentKeyword)}`;
       } else if (tabIndex === 1) {
-        url = `http://localhost:3001/api/donation-projects?keyword=${encodeURIComponent(currentKeyword)}`;
+        url = `${API_BASE_URL}/donation-projects?keyword=${encodeURIComponent(currentKeyword)}`;
       } else if (tabIndex === 2) {
-        url = `http://localhost:3001/api/charity-products?keyword=${encodeURIComponent(currentKeyword)}`;
+        url = `${API_BASE_URL}/charity-products?keyword=${encodeURIComponent(currentKeyword)}`;
       }
 
       const res = await fetch(url);
