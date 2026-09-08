@@ -40,6 +40,9 @@ export default function DonationTargets() {
     if (loadingMap[tabIndex]) return;
     setLoadingMap((prev) => ({ ...prev, [tabIndex]: true }));
     try {
+      setHasMoreMap((prev) => ({ ...prev, [tabIndex]: true }));
+      setPageMap((prev) => ({ ...prev, [activeTab]: page }));
+
       let endpoint = '';
       if (tabIndex === 0) endpoint = 'charity-organizations';
       else if (tabIndex === 1) endpoint = 'donation-projects';
@@ -65,11 +68,7 @@ export default function DonationTargets() {
   };
 
   useEffect(() => {
-    // Initial fetch for the tab if no data yet
-    if (activeTab === 0 && organizations.length === 0) fetchData(0, 1);
-    else if (activeTab === 1 && projects.length === 0) fetchData(1, 1);
-    else if (activeTab === 2 && products.length === 0) fetchData(2, 1);
-    // fetchData(activeTab, 1);
+    fetchData(activeTab, 1);
   }, [activeTab]);
 
   useEffect(() => {
