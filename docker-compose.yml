@@ -2,8 +2,12 @@ services:
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile.dev
     ports:
       - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
       - DATABASE_URL=mysql://search-module:search-module@mysql:3306/search-module
@@ -11,15 +15,21 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile.dev
       args:
         - NEXT_PUBLIC_API_URL=${API_URL}
     ports:
       - "${UI_PORT}:3000"
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_API_URL=${API_URL}
+      - WATCHPACK_POLLING=true
 
   mysql:
     image: mysql:8.4

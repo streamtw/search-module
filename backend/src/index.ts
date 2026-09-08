@@ -40,7 +40,7 @@ fastify.get('/api/donation-projects', async (request, reply) => {
   const { keyword, page = '1' } = request.query as { keyword?: string; page?: string };
   const limit = 10;
   const skip = (parseInt(page) - 1) * limit;
-  await sleep(500);
+  // await sleep(500);
 
   const where = keyword ? {
     OR: [
@@ -60,7 +60,7 @@ fastify.get('/api/charity-products', async (request, reply) => {
   const { keyword, page = '1' } = request.query as { keyword?: string; page?: string };
   const limit = 10;
   const skip = (parseInt(page) - 1) * limit;
-  await sleep(500);
+  // await sleep(500);
 
   const where = keyword ? {
     OR: [
