@@ -18,58 +18,61 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // APIs
 fastify.get('/api/charity-organizations', async (request, reply) => {
-  const { keyword } = request.query as { keyword?: string };
-  // await sleep(500);
+  const { keyword, page = '1' } = request.query as { keyword?: string; page?: string };
+  const limit = 10;
+  const skip = (parseInt(page) - 1) * limit;
 
-  if (!keyword) {
-    return prisma.charityOrganization.findMany();
-  }
+  const where = keyword ? {
+    OR: [
+      { title: { contains: keyword } },
+      { description: { contains: keyword } },
+    ],
+  } : {};
 
   return prisma.charityOrganization.findMany({
-    where: {
-      OR: [
-        { title: { contains: keyword } },
-        { description: { contains: keyword } },
-      ],
-    },
+    where,
+    skip,
+    take: limit,
   });
 });
 
 fastify.get('/api/donation-projects', async (request, reply) => {
-  const { keyword } = request.query as { keyword?: string };
+  const { keyword, page = '1' } = request.query as { keyword?: string; page?: string };
+  const limit = 10;
+  const skip = (parseInt(page) - 1) * limit;
   await sleep(500);
 
-  if (!keyword) {
-    return prisma.donationProject.findMany();
-  }
+  const where = keyword ? {
+    OR: [
+      { title: { contains: keyword } },
+      { organization: { contains: keyword } },
+    ],
+  } : {};
 
   return prisma.donationProject.findMany({
-    where: {
-      OR: [
-        { title: { contains: keyword } },
-        { organization: { contains: keyword } },
-        // Filtering by JSON tags might be complex depending on MySQL version and Prisma support
-        // For simplicity, we'll just check title and organization or use a raw query if needed
-      ],
-    },
+    where,
+    skip,
+    take: limit,
   });
 });
 
 fastify.get('/api/charity-products', async (request, reply) => {
-  const { keyword } = request.query as { keyword?: string };
+  const { keyword, page = '1' } = request.query as { keyword?: string; page?: string };
+  const limit = 10;
+  const skip = (parseInt(page) - 1) * limit;
   await sleep(500);
 
-  if (!keyword) {
-    return prisma.charityProduct.findMany();
-  }
+  const where = keyword ? {
+    OR: [
+      { title: { contains: keyword } },
+      { organization: { contains: keyword } },
+    ],
+  } : {};
 
   return prisma.charityProduct.findMany({
-    where: {
-      OR: [
-        { title: { contains: keyword } },
-        { organization: { contains: keyword } },
-      ],
-    },
+    where,
+    skip,
+    take: limit,
   });
 });
 
