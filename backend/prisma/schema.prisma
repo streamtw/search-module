@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model CharityOrganization {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String @db.Text
+  image       String
+}
+
+model DonationProject {
+  id           Int    @id @default(autoincrement())
+  organization String
+  title        String
+  tags         Json
+  image        String
+}
+
+model CharityProduct {
+  id           Int    @id @default(autoincrement())
+  title        String
+  organization String
+  price        String
+  image        String
+}

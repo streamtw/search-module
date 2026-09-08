@@ -6,6 +6,7 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=mysql://search-module:search-module@mysql:3306/search-module
 
   frontend:
     build:
@@ -19,3 +20,17 @@ services:
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_API_URL=${API_URL}
+
+  mysql:
+    image: mysql:8.4
+    tty: true
+    ports:
+      - '${DB_PORT}:3306'
+    environment:
+      MYSQL_DATABASE: search-module
+      MYSQL_USER: search-module
+      MYSQL_PASSWORD: search-module
+      MYSQL_ROOT_PASSWORD: search-module
+    volumes:
+      - ~/.docker/search-module/data/mysql:/var/lib/mysql:cached
+      - './docker/mysql:/etc/mysql/conf.d'

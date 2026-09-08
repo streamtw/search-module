@@ -1,67 +1,11 @@
 import type { CharityOrganization, DonationProject, CharityProduct } from './types.js';
 
-export const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = [
-  {
-    id: 1,
-    title: '公益團體名稱公益團體名稱公益團',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/1/200/300',
-  },
-  {
-    id: 2,
-    title: '公益團體名稱公益團體名稱公益團',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/2/200/300',
-  },
-  {
-    id: 3,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/3/200/300',
-  },
-  {
-    id: 4,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/4/200/300',
-  },
-  {
-    id: 5,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/5/200/300',
-  },
-  {
-    id: 6,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/6/200/300',
-  },
-  {
-    id: 7,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/7/200/300',
-  },
-  {
-    id: 8,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/8/200/300',
-  },
-  {
-    id: 9,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/9/200/300',
-  },
-  {
-    id: 10,
-    title: '財團法人流浪動物基金會',
-    description: '團體簡介團體簡介團體簡介團體簡介團體簡介',
-    image: 'https://picsum.photos/id/10/200/300',
-  },
-];
+export const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = Array.from({ length: 25 }, (_, i) => ({
+  id: i + 1,
+  title: `公益團體名稱 ${i + 1}`,
+  description: `團體簡介 ${i + 1}`,
+  image: `https://picsum.photos/id/${i + 1}/200/300`,
+}));
 
 export const MOCK_DONATION_PROJECTS: DonationProject[] = [
   {
