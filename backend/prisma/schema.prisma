@@ -8,24 +8,38 @@ datasource db {
 }
 
 model CharityOrganization {
-  id          Int    @id @default(autoincrement())
-  title       String
-  description String @db.Text
-  image       String
+  id                   Int              @id @default(autoincrement())
+  title                String
+  description          String           @db.Text
+  image                String
+  donation_category_id Int?
+  category             DonationCategory? @relation(fields: [donation_category_id], references: [id])
 }
 
 model DonationProject {
-  id           Int    @id @default(autoincrement())
-  organization String
-  title        String
-  tags         Json
-  image        String
+  id                   Int              @id @default(autoincrement())
+  organization         String
+  title                String
+  tags                 Json
+  image                String
+  donation_category_id Int?
+  category             DonationCategory? @relation(fields: [donation_category_id], references: [id])
 }
 
 model CharityProduct {
-  id           Int    @id @default(autoincrement())
-  title        String
-  organization String
-  price        String
-  image        String
+  id                   Int              @id @default(autoincrement())
+  title                String
+  organization         String
+  price                String
+  image                String
+  donation_category_id Int?
+  category             DonationCategory? @relation(fields: [donation_category_id], references: [id])
+}
+
+model DonationCategory {
+  id            Int                   @id @default(autoincrement())
+  name          String                @unique
+  organizations CharityOrganization[]
+  projects      DonationProject[]
+  products      CharityProduct[]
 }

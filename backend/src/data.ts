@@ -5,6 +5,7 @@ export const MOCK_CHARITY_ORGANIZATIONS: CharityOrganization[] = Array.from({ le
   title: `公益團體名稱 ${i + 1}`,
   description: `團體簡介 ${i + 1}`,
   image: `https://picsum.photos/id/${i + 1}/200/300`,
+  donation_category_id: (i % 9) + 1,
 }));
 
 export const MOCK_DONATION_PROJECTS: DonationProject[] = [
@@ -14,6 +15,7 @@ export const MOCK_DONATION_PROJECTS: DonationProject[] = [
     title: '助學金 | 點亮弱勢孩子的求學路',
     tags: ['兒少照護', '婦女關懷', '弱勢扶貧'],
     image: 'https://picsum.photos/id/21/600/400',
+    donation_category_id: 1,
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ export const MOCK_DONATION_PROJECTS: DonationProject[] = [
     title: '健康老化，從社區開始—長者延緩失能陪伴',
     tags: ['老人照護', '公共議題', '社區發展'],
     image: 'https://picsum.photos/id/22/600/400',
+    donation_category_id: 2,
   },
   {
     id: 3,
@@ -28,6 +31,7 @@ export const MOCK_DONATION_PROJECTS: DonationProject[] = [
     title: '垃圾在哪，我們就到哪！',
     tags: ['環境保護', '生態保育'],
     image: 'https://picsum.photos/id/23/600/400',
+    donation_category_id: 5,
   },
 ];
 
@@ -38,6 +42,7 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 579',
     image: 'https://picsum.photos/id/40/300/300',
+    donation_category_id: 3,
   },
   {
     id: 2,
@@ -45,6 +50,7 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 329',
     image: 'https://picsum.photos/id/42/300/300',
+    donation_category_id: 3,
   },
   {
     id: 3,
@@ -52,6 +58,7 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 459',
     image: 'https://picsum.photos/id/43/300/300',
+    donation_category_id: 3,
   },
   {
     id: 4,
@@ -59,6 +66,7 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 120 - 550',
     image: 'https://picsum.photos/id/45/300/300',
+    donation_category_id: 3,
   },
   {
     id: 5,
@@ -66,6 +74,7 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 210',
     image: 'https://picsum.photos/id/48/300/300',
+    donation_category_id: 3,
   },
   {
     id: 6,
@@ -73,5 +82,6 @@ export const MOCK_CHARITY_PRODUCTS: CharityProduct[] = [
     organization: '白永恩神父基金會',
     price: 'TWD 450',
     image: 'https://picsum.photos/id/49/300/300',
+    donation_category_id: 3,
   },
 ];

@@ -20,3 +20,8 @@ export interface CharityProduct {
   price: string;
   image: string;
 }
+
+export interface DonationCategory {
+  id: number;
+  name: string;
+}

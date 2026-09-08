@@ -3,6 +3,7 @@ export interface CharityOrganization {
   title: string;
   description: string;
   image: string;
+  donation_category_id?: number | null;
 }
 
 export interface DonationProject {
@@ -11,6 +12,7 @@ export interface DonationProject {
   title: string;
   tags: string[];
   image: string;
+  donation_category_id?: number | null;
 }
 
 export interface CharityProduct {
@@ -19,4 +21,5 @@ export interface CharityProduct {
   organization: string;
   price: string;
   image: string;
+  donation_category_id?: number | null;
 }

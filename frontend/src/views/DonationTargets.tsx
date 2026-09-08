@@ -10,11 +10,12 @@ import Tabs from '../components/Tabs';
 import Footer from '../components/Footer';
 import EmptyState from '../components/EmptyState';
 import styles from '../app/page.module.scss';
-import type { CharityOrganization, DonationProject, CharityProduct } from '../types';
+import type { CharityOrganization, DonationProject, CharityProduct, DonationCategory } from '../types';
 import { API_BASE_URL } from '../config';
 
 export default function DonationTargets() {
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<DonationCategory>({ id: 0, name: '全部' });
   const [organizations, setOrganizations] = useState<CharityOrganization[]>([]);
   const [projects, setProjects] = useState<DonationProject[]>([]);
   const [products, setProducts] = useState<CharityProduct[]>([]);
@@ -36,7 +37,7 @@ export default function DonationTargets() {
   const navigate = useNavigate();
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  const fetchData = async (tabIndex: number, page: number, isLoadMore = false) => {
+  const fetchData = async (tabIndex: number, page: number, categoryId: number, isLoadMore = false) => {
     if (loadingMap[tabIndex]) return;
     setLoadingMap((prev) => ({ ...prev, [tabIndex]: true }));
     try {
@@ -48,7 +49,7 @@ export default function DonationTargets() {
       else if (tabIndex === 1) endpoint = 'donation-projects';
       else if (tabIndex === 2) endpoint = 'charity-products';
 
-      const res = await fetch(`${API_BASE_URL}/${endpoint}?page=${page}`);
+      const res = await fetch(`${API_BASE_URL}/${endpoint}?page=${page}&category_id=${categoryId}`);
       const data = await res.json();
 
       if (data.length < 10) {
@@ -68,8 +69,16 @@ export default function DonationTargets() {
   };
 
   useEffect(() => {
-    fetchData(activeTab, 1);
-  }, [activeTab]);
+    // Reset state for the active tab when category changes
+    if (activeTab === 0) setOrganizations([]);
+    else if (activeTab === 1) setProjects([]);
+    else if (activeTab === 2) setProducts([]);
+
+    setPageMap((prev) => ({ ...prev, [activeTab]: 1 }));
+    setHasMoreMap((prev) => ({ ...prev, [activeTab]: true }));
+
+    fetchData(activeTab, 1, selectedCategory.id);
+  }, [activeTab, selectedCategory]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,7 +86,7 @@ export default function DonationTargets() {
         if (entries[0]?.isIntersecting && hasMoreMap[activeTab] && !loadingMap[activeTab]) {
           const nextPage = pageMap[activeTab] + 1;
           setPageMap((prev) => ({ ...prev, [activeTab]: nextPage }));
-          fetchData(activeTab, nextPage, true);
+          fetchData(activeTab, nextPage, selectedCategory.id, true);
         }
       },
       { threshold: 1.0 }
@@ -88,7 +97,7 @@ export default function DonationTargets() {
     }
 
     return () => observer.disconnect();
-  }, [activeTab, hasMoreMap[activeTab], loadingMap[activeTab], pageMap[activeTab]]);
+  }, [activeTab, hasMoreMap[activeTab], loadingMap[activeTab], pageMap[activeTab], selectedCategory.id]);
 
   const handleSearchClick = () => {
     navigate('/search-results');
@@ -107,7 +116,11 @@ export default function DonationTargets() {
     if (activeTab === 0) {
       return (
         <>
-          <FilterSearch onSearchClick={handleSearchClick} />
+          <FilterSearch
+            filterLabel={selectedCategory.name}
+            onFilterChange={setSelectedCategory}
+            onSearchClick={handleSearchClick}
+          />
           {organizations.length > 0 ? (
             <>
               <div className={styles.listContainer}>
@@ -138,7 +151,11 @@ export default function DonationTargets() {
     if (activeTab === 1) {
       return (
         <>
-          <FilterSearch onSearchClick={handleSearchClick} />
+          <FilterSearch
+            filterLabel={selectedCategory.name}
+            onFilterChange={setSelectedCategory}
+            onSearchClick={handleSearchClick}
+          />
           {projects.length > 0 ? (
             <>
               <div className={styles.listContainer}>
@@ -170,7 +187,11 @@ export default function DonationTargets() {
     if (activeTab === 2) {
       return (
         <>
-          <FilterSearch filterLabel="身心障礙服務" onSearchClick={handleSearchClick} />
+          <FilterSearch
+            filterLabel={selectedCategory.name}
+            onFilterChange={setSelectedCategory}
+            onSearchClick={handleSearchClick}
+          />
           {products.length > 0 ? (
             <>
               <div className={styles.productGrid}>
