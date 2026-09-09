@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search, Triangle } from 'lucide-react';
 import DonationCategory from './DonationCategory';
 import type { DonationCategory as CategoryType } from '../types';
 import styles from './FilterSearch.module.scss';
@@ -26,7 +26,7 @@ export default function FilterSearch({
           className={styles.filterButton}
           onClick={() => setIsCategoryOpen(true)}
         >
-          {filterLabel} <ChevronDown size={16} />
+          {filterLabel} <Triangle size={6} className={styles.triangleIcon} color="#999" fill="#999" />
         </button>
         <button className={styles.searchButton} onClick={onSearchClick}>
           <Search size={20} color="#999" />
