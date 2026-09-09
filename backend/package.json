@@ -2,13 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "source ~/.nvm/nvm.sh && nvm use v22 && tsx watch src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "docker:dev": "nodemon --exec tsx src/index.ts",
-    "build": "source ~/.nvm/nvm.sh && nvm use v22 && tsc",
-    "start": "source ~/.nvm/nvm.sh && nvm use v22 && node dist/index.js",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:seed": "tsx prisma/seed.ts"
   },
