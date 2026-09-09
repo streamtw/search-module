@@ -25,7 +25,7 @@ fastify.get('/api/charity-organizations', async (request, reply) => {
   const { keyword, page = '1', category_id } = request.query as { keyword?: string; page?: string; category_id?: string };
   const limit = 10;
   const skip = (parseInt(page) - 1) * limit;
-  // await sleep(2000);
+  // await sleep(2000); // used to display loading UI
 
   const where: Prisma.CharityOrganizationWhereInput = {};
   const conditions: Prisma.CharityOrganizationWhereInput[] = [];
@@ -60,7 +60,7 @@ fastify.get('/api/donation-projects', async (request, reply) => {
   const { keyword, page = '1', category_id } = request.query as { keyword?: string; page?: string; category_id?: string };
   const limit = 10;
   const skip = (parseInt(page) - 1) * limit;
-  // await sleep(500);
+  // await sleep(500); // used to display loading UI
 
   const where: Prisma.DonationProjectWhereInput = {};
   const conditions: Prisma.DonationProjectWhereInput[] = [];
@@ -95,7 +95,7 @@ fastify.get('/api/charity-products', async (request, reply) => {
   const { keyword, page = '1', category_id } = request.query as { keyword?: string; page?: string; category_id?: string };
   const limit = 10;
   const skip = (parseInt(page) - 1) * limit;
-  // await sleep(500);
+  // await sleep(500); // used to display loading UI
 
   const where: Prisma.CharityProductWhereInput = {};
   const conditions: Prisma.CharityProductWhereInput[] = [];
