@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import styles from './SearchBar.module.scss';
 
 interface SearchBarProps {
@@ -7,7 +7,7 @@ interface SearchBarProps {
   onChange?: (value: string) => void;
 }
 
-export default function SearchBar({ onCancel, value, onChange }: SearchBarProps) {
+export default function SearchBar({ onCancel, value = '', onChange }: SearchBarProps) {
   return (
     <div className={styles.container}>
       <div className={styles.searchWrapper}>
@@ -19,6 +19,15 @@ export default function SearchBar({ onCancel, value, onChange }: SearchBarProps)
           onChange={(e) => onChange?.(e.target.value)}
           className={styles.input}
         />
+        {value && (
+          <button
+            className={styles.clearButton}
+            onClick={() => onChange?.('')}
+            aria-label="清除"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
       <button className={styles.cancelButton} onClick={onCancel}>取消</button>
     </div>

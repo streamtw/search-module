@@ -32,11 +32,16 @@ export default function SearchResults() {
     1: false,
     2: false,
   });
+  const [hasFetchedMap, setHasFetchedMap] = useState<{ [key: number]: boolean }>({
+    0: false,
+    1: false,
+    2: false,
+  });
   const navigate = useNavigate();
   const observerTarget = useRef<HTMLDivElement>(null);
 
   const fetchData = useCallback(async (tabIndex: number, currentKeyword: string, page: number, isLoadMore = false) => {
-    if (loadingMap[tabIndex]) return;
+    if (!currentKeyword.trim() || loadingMap[tabIndex]) return;
     setLoadingMap((prev) => ({ ...prev, [tabIndex]: true }));
     try {
       let endpoint = '';
@@ -57,6 +62,8 @@ export default function SearchResults() {
       if (tabIndex === 0) setOrganizations((prev) => isLoadMore ? [...prev, ...data] : data);
       else if (tabIndex === 1) setProjects((prev) => isLoadMore ? [...prev, ...data] : data);
       else if (tabIndex === 2) setProducts((prev) => isLoadMore ? [...prev, ...data] : data);
+
+      setHasFetchedMap((prev) => ({ ...prev, [tabIndex]: true }));
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -65,9 +72,20 @@ export default function SearchResults() {
   }, []);
 
   useEffect(() => {
+    if (!keyword.trim()) {
+      setOrganizations([]);
+      setProjects([]);
+      setProducts([]);
+      setPageMap({ 0: 1, 1: 1, 2: 1 });
+      setHasMoreMap({ 0: true, 1: true, 2: true });
+      setHasFetchedMap({ 0: false, 1: false, 2: false });
+      return;
+    }
+
     const timer = setTimeout(() => {
       // When keyword or tab changes, reset everything for that tab and fetch page 1
       setPageMap((prev) => ({ ...prev, [activeTab]: 1 }));
+      setHasFetchedMap((prev) => ({ ...prev, [activeTab]: false }));
       fetchData(activeTab, keyword, 1, false);
     }, 300); // Debounce 300ms
 
@@ -106,6 +124,10 @@ export default function SearchResults() {
       );
     }
 
+    if (!hasFetchedMap[activeTab]) {
+      return null;
+    }
+
     if (activeTab === 0) {
       return (
         <>
@@ -127,11 +149,11 @@ export default function SearchResults() {
                   <span className={styles.loader}></span>
                 </div>
               )}
+              <Footer />
             </>
           ) : (
             <EmptyState />
           )}
-          <Footer />
         </>
       );
     }
@@ -158,11 +180,11 @@ export default function SearchResults() {
                   <span className={styles.loader}></span>
                 </div>
               )}
+              <Footer />
             </>
           ) : (
             <EmptyState />
           )}
-          <Footer />
         </>
       );
     }
@@ -189,11 +211,11 @@ export default function SearchResults() {
                   <span className={styles.loader}></span>
                 </div>
               )}
+              <Footer />
             </>
           ) : (
             <EmptyState />
           )}
-          <Footer />
         </>
       );
     }
