@@ -16,6 +16,7 @@ import { API_BASE_URL } from '../config';
 export default function DonationTargets() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<DonationCategory>({ id: 0, name: '全部' });
+  const [categories, setCategories] = useState<DonationCategory[]>([]);
   const [organizations, setOrganizations] = useState<CharityOrganization[]>([]);
   const [projects, setProjects] = useState<DonationProject[]>([]);
   const [products, setProducts] = useState<CharityProduct[]>([]);
@@ -69,6 +70,20 @@ export default function DonationTargets() {
   };
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/donation-categories`);
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
     // Reset state for the active tab when category changes
     if (activeTab === 0) setOrganizations([]);
     else if (activeTab === 1) setProjects([]);
@@ -120,6 +135,7 @@ export default function DonationTargets() {
             filterLabel={selectedCategory.name}
             onFilterChange={setSelectedCategory}
             onSearchClick={handleSearchClick}
+            categories={categories}
           />
           {organizations.length > 0 ? (
             <>
@@ -155,6 +171,7 @@ export default function DonationTargets() {
             filterLabel={selectedCategory.name}
             onFilterChange={setSelectedCategory}
             onSearchClick={handleSearchClick}
+            categories={categories}
           />
           {projects.length > 0 ? (
             <>
@@ -191,6 +208,7 @@ export default function DonationTargets() {
             filterLabel={selectedCategory.name}
             onFilterChange={setSelectedCategory}
             onSearchClick={handleSearchClick}
+            categories={categories}
           />
           {products.length > 0 ? (
             <>

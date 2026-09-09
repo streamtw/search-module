@@ -11,6 +11,7 @@ interface DonationCategoryProps {
   onClose: () => void;
   onSelect: (category: CategoryType) => void;
   selectedCategoryName: string;
+  categories: CategoryType[];
 }
 
 export default function DonationCategory({
@@ -18,23 +19,9 @@ export default function DonationCategory({
   onClose,
   onSelect,
   selectedCategoryName,
+  categories,
 }: DonationCategoryProps) {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(`${API_BASE_URL}/donation-categories`);
-        const data = await res.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     if (isOpen) {

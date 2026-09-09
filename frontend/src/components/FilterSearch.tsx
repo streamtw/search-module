@@ -8,12 +8,14 @@ interface FilterSearchProps {
   filterLabel?: string;
   onSearchClick?: () => void;
   onFilterChange?: (category: CategoryType) => void;
+  categories: CategoryType[];
 }
 
 export default function FilterSearch({
   filterLabel = '全部',
   onSearchClick,
-  onFilterChange
+  onFilterChange,
+  categories
 }: FilterSearchProps) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
@@ -36,6 +38,7 @@ export default function FilterSearch({
         onClose={() => setIsCategoryOpen(false)}
         onSelect={onFilterChange || (() => {})}
         selectedCategoryName={filterLabel}
+        categories={categories}
       />
     </div>
   );
